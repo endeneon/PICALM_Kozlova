@@ -1,0 +1,41 @@
+# A simple karyotype with 5 chromosomes
+#
+# chr1 5Mb
+# chr2 10Mb
+# chr3 20Mb
+# chr4 50Mb
+# chr5 100Mb
+#
+# The format of this file is
+#
+# chr - CHRNAME CHRLABEL START END COLOR
+#
+# In data files, chromosomes are refered to by CHRNAME. 
+# On the image, they are labeled by CHRLABEL
+#
+# Colors are taken from the spectral Brewer palette. 
+# To learn about Brewer palettes, see 
+#
+#   www.colorbrewer2.org
+#   mkweb.bcgsc.ca/brewer
+
+# chr - chr1 1 0 5000000 spectral-5-div-1
+# chr - chr2 2 0 10000000 spectral-5-div-2
+# chr - chr3 3 0 20000000 spectral-5-div-3
+# chr - chr4 4 0 50000000 spectral-5-div-4
+# chr - chr5 5 0 100000000 spectral-5-div-5
+chr - chr2 chr2 127035234 127235235 set1-8-div-1
+chr - chr2 chr2_2 233017202 233217203 set1-8-div-2
+chr - chr5 chr5 86897803 87097804 set1-8-div-3
+chr - chr7 chr7 12122945 12344383 set1-8-div-4
+chr - chr7 chr7_2 100274211 100474212 set1-8-div-5
+chr - chr8 chr8 27237604 27708799 set1-8-div-6
+chr - chr8 chr8 144003704 144203705 set1-8-div-7
+chr - chr10 chr10 80397814 96359828 set1-8-div-8
+chr - chr11 chr11 47295195 86256834 dark2-8-div-1
+chr - chr12 chr12 113094007 113340587 dark2-8-div-2
+chr - chr14 chr14 92365701 92565702 dark2-8-div-3
+chr - chr15 chr15 63971392 64195854 dark2-8-div-4
+chr - chr16 chr16 79474934 79674935 dark2-8-div-5
+chr - chr17 chr17 5155419 5355420 dark2-8-div-6
+
