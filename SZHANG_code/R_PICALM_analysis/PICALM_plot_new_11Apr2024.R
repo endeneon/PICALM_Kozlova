@@ -13,10 +13,13 @@
   
   library(RColorBrewer)
   library(ggpubr)
+  
+  library(lme4)
+  library(lmtest)
 }
 # library(seqLogo)
 
-## Fig_3B ####
+## Fig_Ex_5F ####
 df_raw <-
   read_excel("tables_4_plot_new.xlsx",
              sheet = 1)
@@ -93,6 +96,41 @@ ggplot(df_2_plot,
   ggtitle(unique(df_2_plot$Line))
 
 df_2_plot <-
+  df_2_plot[!(df_2_plot$variable == '0 min'), ]
+
+for (cell_time in unique(df_2_plot$variable)) {
+  df_2_plot_sub <-
+    df_2_plot[df_2_plot$variable == cell_time, ]
+  print(cell_time)
+  # df_2_plot_sub$Genotype <-
+  #   factor(df_2_plot_sub$Genotype,
+  #          levels = c("Non-risk",
+  #                     "Risk",
+  #                     "CRISPRoff"))
+  df_2_plot_sub$Genotype <-
+    relevel(df_2_plot_sub$Genotype,
+            ref = "risk")
+  df_2_plot_sub$Batch <-
+    rep_len(x = c(1,1,2,2,3,3),
+            length.out = nrow(df_2_plot_sub))
+  # prin
+  lm_model <-
+    lmerTest::lmer(Value ~ Genotype + 
+                     (1|Batch),
+                   data = df_2_plot_sub)
+  # summary(lm_model)
+  lm_output <-
+    summary(lm_model)
+  print(lm_output)
+  #   anova(lm_model)
+  # print(cell_time)
+  # print(lm_output$coefficients)
+}
+
+
+## CD09 #####
+
+df_2_plot <-
   df_raw[df_raw$Line == "CD09", ]
 
 df_2_plot <-
@@ -162,7 +200,39 @@ ggplot(df_2_plot,
                                    vjust = 0)) +
   ggtitle(unique(df_2_plot$Line))
 
-## Fig_S7B ####
+df_2_plot <-
+  df_2_plot[!(df_2_plot$variable == '0 min'), ]
+
+for (cell_time in unique(df_2_plot$variable)) {
+  df_2_plot_sub <-
+    df_2_plot[df_2_plot$variable == cell_time, ]
+  print(cell_time)
+  # df_2_plot_sub$Genotype <-
+  #   factor(df_2_plot_sub$Genotype,
+  #          levels = c("Non-risk",
+  #                     "Risk",
+  #                     "CRISPRoff"))
+  df_2_plot_sub$Genotype <-
+    relevel(df_2_plot_sub$Genotype,
+            ref = "risk")
+  df_2_plot_sub$Batch <-
+    rep_len(x = c(1,1,2,2,3,3),
+            length.out = nrow(df_2_plot_sub))
+  # prin
+  lm_model <-
+    lmerTest::lmer(Value ~ Genotype + (1|Batch),
+                   data = df_2_plot_sub)
+  # summary(lm_model)
+  lm_output <-
+    summary(lm_model)
+  print(lm_output)
+  #   anova(lm_model)
+  # print(cell_time)
+  # print(lm_output$coefficients)
+}
+
+
+## Fig_E5h ####
 df_raw <-
   read_excel("tables_4_plot_new.xlsx",
              sheet = 2)
@@ -239,6 +309,38 @@ ggplot(df_2_plot,
   ggtitle(unique(df_2_plot$Line))
 
 df_2_plot <-
+  df_2_plot[!(df_2_plot$variable == '0 min'), ]
+
+for (cell_time in unique(df_2_plot$variable)) {
+  df_2_plot_sub <-
+    df_2_plot[df_2_plot$variable == cell_time, ]
+  print(cell_time)
+  # df_2_plot_sub$Genotype <-
+  #   factor(df_2_plot_sub$Genotype,
+  #          levels = c("Non-risk",
+  #                     "Risk",
+  #                     "CRISPRoff"))
+  df_2_plot_sub$Genotype <-
+    relevel(df_2_plot_sub$Genotype,
+            ref = "risk")
+  df_2_plot_sub$Batch <-
+    rep_len(x = c(1,1,2,2,3,3),
+            length.out = nrow(df_2_plot_sub))
+  # prin
+  lm_model <-
+    lmerTest::lmer(Value ~ Genotype + (1|Batch),
+                   data = df_2_plot_sub)
+  # summary(lm_model)
+  lm_output <-
+    summary(lm_model)
+  print(lm_output)
+  #   anova(lm_model)
+  # print(cell_time)
+  # print(lm_output$coefficients)
+}
+
+
+df_2_plot <-
   df_raw[df_raw$Line == "CD09", ]
 
 df_2_plot <-
@@ -307,6 +409,37 @@ ggplot(df_2_plot,
                                    hjust = 0,
                                    vjust = 0)) +
   ggtitle(unique(df_2_plot$Line))
+
+df_2_plot <-
+  df_2_plot[!(df_2_plot$variable == '0 min'), ]
+
+for (cell_time in unique(df_2_plot$variable)) {
+  df_2_plot_sub <-
+    df_2_plot[df_2_plot$variable == cell_time, ]
+  print(cell_time)
+  # df_2_plot_sub$Genotype <-
+  #   factor(df_2_plot_sub$Genotype,
+  #          levels = c("Non-risk",
+  #                     "Risk",
+  #                     "CRISPRoff"))
+  df_2_plot_sub$Genotype <-
+    relevel(df_2_plot_sub$Genotype,
+            ref = "risk")
+  df_2_plot_sub$Batch <-
+    rep_len(x = c(1,1,2,2,3,3),
+            length.out = nrow(df_2_plot_sub))
+  # prin
+  lm_model <-
+    lmerTest::lmer(Value ~ Genotype + (1|Batch),
+                   data = df_2_plot_sub)
+  # summary(lm_model)
+  lm_output <-
+    summary(lm_model)
+  print(lm_output)
+  #   anova(lm_model)
+  # print(cell_time)
+  # print(lm_output$coefficients)
+}
 
 ## Fig.6C ####
 df_raw <-
@@ -465,6 +598,30 @@ df_2_plot$variable <-
                     "90 min",
                     "135 min",
                     "180 min"))
+
+for (cell_time in unique(df_2_plot$variable)) {
+  df_2_plot_sub <-
+    df_2_plot[df_2_plot$variable == cell_time, ]
+  # df_2_plot_sub$Genotype <-
+  #   factor(df_2_plot_sub$Genotype,
+  #          levels = c("Non-risk",
+  #                     "Risk",
+  #                     "CRISPRoff"))
+  df_2_plot_sub$Genotype <-
+    relevel(df_2_plot_sub$Genotype,
+            ref = "risk")
+  # prin
+  lm_model <-
+    lmerTest::lmer(Value ~ Genotype + (1|Batch),
+                   data = df_2_plot_sub)
+  # summary(lm_model)
+  lm_output <-
+    summary(lm_model)
+  #   anova(lm_model)
+  print(cell_time)
+  print(lm_output$coefficients)
+}
+
 
 ggplot(df_2_plot,
        aes(x = variable,
@@ -722,3 +879,16 @@ ggerrorplot(df_2_plot,
         axis.text.x = element_text(angle = 315,
                                    hjust = 0,
                                    vjust = 0)) 
+
+df_2_plot$BR <-
+  c(1,1,2,2,2,2,
+     1,1,2,2,2,2,
+     1,1,2,2)
+lm_model <-
+  lmerTest::lmer(Value ~ 
+                   variable + 
+                   (1|BR),
+                 data = df_2_plot)
+
+summary(lm_model)
+anova(lm_model)

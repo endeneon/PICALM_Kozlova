@@ -31,8 +31,22 @@ colnames(df_2_plot) <-
 df_2_plot$Genotype <-
   factor(df_2_plot$Genotype,
          levels = c("risk", "risk_TrC",
-                    '',
+                    # '',
                     "non-risk", "non-risk_TrC"))
+df_2_plot$BR <-
+  rep_len(x = c(1,1,1,1,
+                2,2,2,2),
+          length.out = 32)
+
+lm_model <-
+  lmerTest::lmer(Value ~ 
+                   Genotype + 
+                   (1|BR),
+                 data = df_2_plot)
+summary(lm_model)
+
+
+
 
 
 ggerrorplot(df_2_plot,
@@ -61,7 +75,8 @@ ggerrorplot(df_2_plot,
   stat_compare_means(label = "p.signif",
                      # label.y = 20,
                      # label.y.npc = c(0.5, 0.6),
-                     method = 't.test',
+                     # method = 't.test',
+                     method = "wilcox.test",
                      paired = F,
                      hide.ns = F,
                      # ref.group = "non-risk",
@@ -72,9 +87,9 @@ ggerrorplot(df_2_plot,
        y = "LD puncta/iMG") +
   scale_x_discrete(drop = F) +
   # ylim(0, 12) +
-  scale_y_continuous(expand = c(0, 0),
-                     limits = c(0, 120),
-                     na.value = NA) +
+  # scale_y_continuous(expand = c(0, 0),
+  #                    limits = c(0, 120),
+  #                    na.value = NA) +
   # stat_compare_means(label = "p.signif")
   theme_classic() +
   theme(axis.text = element_text(size = 10,
@@ -99,8 +114,48 @@ colnames(df_2_plot) <-
 df_2_plot$Genotype <-
   factor(df_2_plot$Genotype,
          levels = c("risk", "risk_TrC",
-                    '',
+                    # '',
                     "non-risk", "non-risk_TrC"))
+
+df_2_plot$BR <-
+  rep_len(x = c(1,1,1,1,
+                2,2,2,2),
+          length.out = 32)
+
+lm_model <-
+  lmerTest::lmer(Value ~ 
+                   Genotype + 
+                   (1|BR),
+                 data = df_2_plot)
+summary(lm_model)
+anova(lm_model)
+
+lm_model <-
+  lmerTest::lmer(Value ~ 
+                   Genotype,
+                 data = df_2_plot)
+summary(lm_model)
+anova(lm_model)
+
+df_2_plot$Genotype <-
+  factor(df_2_plot$Genotype,
+         levels = c("non-risk", "non-risk_TrC",
+                    "risk", "risk_TrC"))
+
+lm_model <-
+  lmerTest::lmer(Value ~ 
+                   Genotype + 
+                   (1|BR),
+                 data = df_2_plot)
+summary(lm_model)
+anova(lm_model)
+
+lm_model <-
+  glm(Value ~ 
+                   Genotype,
+                 data = df_2_plot)
+summary(lm_model)
+anova(lm_model)
 
 
 ggerrorplot(df_2_plot,
@@ -167,9 +222,36 @@ colnames(df_2_plot) <-
 df_2_plot$Genotype <-
   factor(df_2_plot$Genotype,
          levels = c("risk", "risk_TrC",
-                    '',
+                    # '',
                     "non-risk", "non-risk_TrC"))
 
+
+df_2_plot$BR <-
+  rep_len(x = c(1,1,1,1,
+                2,2,2,2),
+          length.out = 32)
+
+lm_model <-
+  lmerTest::lmer(Value ~ 
+                   Genotype + 
+                   (1|BR),
+                 data = df_2_plot)
+
+summary(lm_model)
+anova(lm_model)
+
+df_2_plot$Genotype <-
+  factor(df_2_plot$Genotype,
+         levels = c("non-risk", "non-risk_TrC",
+                    "risk", "risk_TrC"))
+
+lm_model <-
+  lmerTest::lmer(Value ~ 
+                   Genotype + 
+                   (1|BR),
+                 data = df_2_plot)
+summary(lm_model)
+anova(lm_model)
 
 ggerrorplot(df_2_plot,
             x = "Genotype",
@@ -232,12 +314,45 @@ df_2_plot <-
 colnames(df_2_plot) <-
   c("Genotype", "Value")
 
+# df_2_plot$Genotype <-
+#   factor(df_2_plot$Genotype,
+#          levels = c("risk", "risk_TrC",
+#                     '',
+#                     "non-risk", "non-risk_TrC"))
+
 df_2_plot$Genotype <-
   factor(df_2_plot$Genotype,
          levels = c("risk", "risk_TrC",
-                    '',
+                    # '',
                     "non-risk", "non-risk_TrC"))
 
+
+df_2_plot$BR <-
+  rep_len(x = c(1,1,1,1,
+                2,2,2,2),
+          length.out = 32)
+
+lm_model <-
+  lmerTest::lmer(Value ~ 
+                   Genotype + 
+                   (1|BR),
+                 data = df_2_plot)
+
+summary(lm_model)
+anova(lm_model)
+
+df_2_plot$Genotype <-
+  factor(df_2_plot$Genotype,
+         levels = c("non-risk", "non-risk_TrC",
+                    "risk", "risk_TrC"))
+
+lm_model <-
+  lmerTest::lmer(Value ~ 
+                   Genotype + 
+                   (1|BR),
+                 data = df_2_plot)
+summary(lm_model)
+anova(lm_model)
 
 ggerrorplot(df_2_plot,
             x = "Genotype",

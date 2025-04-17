@@ -15,7 +15,7 @@
   library(ggpubr)
 }
 
-## Fig_5F ####
+## Fig_Ex_7g ####
 df_raw <-
   read_excel("tables_4_plot_v3.xlsx",
              sheet = 1)
@@ -40,6 +40,24 @@ df_2_plot <-
   df_2_plot[df_2_plot$Cell_line == "CD04", ]
 # df_2_plot <-
 #   df_2_plot[!(df_2_plot$Genotype == "risk"), ]
+
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
 
 ggerrorplot(df_2_plot,
             x = "Genotype",
@@ -70,7 +88,7 @@ ggerrorplot(df_2_plot,
                linewidth = 0.2,
                colour = "black") +
   labs(x = "",
-       y = "LD puncta/iMG") +
+       y = "LD area/iMG") +
   # ylim(0, 12) +
   scale_y_continuous(expand = c(0, 0),
                      limits = c(0, 200),
@@ -84,8 +102,48 @@ ggerrorplot(df_2_plot,
                                    vjust = 0)) +
   ggtitle("CD04")
 
+## CD09 #####
+df_2_plot <- df_raw
+
+df_2_plot <-
+  melt(df_2_plot, 
+       variable.name = "Genotype")
+df_2_plot$Genotype <-
+  factor(df_2_plot$Genotype,
+         levels = c("risk",
+                    "non-risk",
+                    "CRISPRoff"))
+
+df_2_plot$Cell_line <-
+  factor(df_2_plot$Cell_line,
+         levels = c("CD04",
+                    "CD09"))
+
 df_2_plot <-
   df_2_plot[df_2_plot$Cell_line == "CD09", ]
+# 
+# df_2_plot <-
+#   df_2_plot[df_2_plot$Cell_line == "CD09", ]
+
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
+
+
 
 ggerrorplot(df_2_plot,
             x = "Genotype",
@@ -129,7 +187,7 @@ ggerrorplot(df_2_plot,
                                    vjust = 0)) +
   ggtitle("CD09")
 
-## Fig_5D ####
+## Fig_Ex_7e ####
 df_raw <-
   read_excel("tables_4_plot_v3.xlsx",
              sheet = 2)
@@ -153,6 +211,24 @@ df_2_plot$Genotype <-
 df_2_plot <-
   df_2_plot[df_2_plot$Cell_line == "CD04", ]
 
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
+
 ggerrorplot(df_2_plot,
             x = "Genotype",
             y = "value",
@@ -168,7 +244,8 @@ ggerrorplot(df_2_plot,
                       guide = "none") +
   stat_compare_means(label = "p.signif",
                      label.y.npc = .5,
-                     method = 't.test',
+                     # method = 't.test',
+                     method = 'wilcox.test',
                      hide.ns = F,
                      ref.group = "non-risk",
                      paired = F) +
@@ -209,6 +286,8 @@ df_2_plot$Genotype <-
 
 df_2_plot <-
   df_2_plot[df_2_plot$Cell_line == "CD09", ]
+
+
 
 ggerrorplot(df_2_plot,
             x = "Genotype",
@@ -252,7 +331,27 @@ ggerrorplot(df_2_plot,
                                    vjust = 0)) +
   ggtitle("CD09")
 
-## Fig_5E ####
+
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
+
+
+## Fig_Ex_7F ####
 df_raw <-
   read_excel("tables_4_plot_v3.xlsx",
              sheet = 3)
@@ -324,6 +423,28 @@ ggerrorplot(df_2_plot,
                                    vjust = 0)) +
   ggtitle("CD04")
 
+
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
+
+
+
+
 df_2_plot <- df_raw
 
 df_2_plot <-
@@ -387,7 +508,30 @@ ggerrorplot(df_2_plot,
                                    vjust = 0)) +
   ggtitle("CD09")
 
-## Fig_5G ####
+
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
+
+
+
+
+
+## Fig_Ex_7H ####
 df_raw <-
   read_excel("tables_4_plot_v3.xlsx",
              sheet = 4)
@@ -457,6 +601,28 @@ ggerrorplot(df_2_plot,
                                    vjust = 0)) +
   ggtitle("CD04")
 
+
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
+
+
+
+
 df_2_plot <- df_raw
 df_2_plot <-
   melt(df_2_plot)
@@ -517,7 +683,28 @@ ggerrorplot(df_2_plot,
                                    vjust = 0)) +
   ggtitle("CD09")
 
-## Fig_S11B ####
+
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
+
+
+
+## Fig_Ex_7j-m ####
 df_raw <-
   read_excel("tables_4_plot_v3.xlsx",
              sheet = 5)
@@ -532,6 +719,7 @@ df_2_plot$Genotype <-
          levels = c("risk",
                     "non-risk",
                     "CRISPRoff"))
+
 # 
 # df_2_plot$Cell_line <-
 #   factor(df_2_plot$Cell_line,
@@ -540,6 +728,25 @@ df_2_plot$Genotype <-
 
 df_2_plot <-
   df_2_plot[df_2_plot$Cell_line == "CD04", ]
+
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
+
 
 ggerrorplot(df_2_plot,
             x = "Genotype",
@@ -597,6 +804,24 @@ df_2_plot$Genotype <-
 
 df_2_plot <-
   df_2_plot[df_2_plot$Cell_line == "CD09", ]
+
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
 
 ggerrorplot(df_2_plot,
             x = "Genotype",
@@ -670,6 +895,25 @@ df_2_plot$Genotype <-
 df_2_plot <-
   df_2_plot[df_2_plot$Cell_line == "CD04", ]
 
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
+
+
 ggerrorplot(df_2_plot,
             x = "Genotype",
             y = "Value",
@@ -733,6 +977,24 @@ df_2_plot$Genotype <-
 
 df_2_plot <-
   df_2_plot[df_2_plot$Cell_line == "CD09", ]
+
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
 
 ggerrorplot(df_2_plot,
             x = "Genotype",
@@ -802,6 +1064,24 @@ df_2_plot <-
   df_2_plot[df_2_plot$Cell_line == "CD04", ]
 # df_2_plot <-
 #   df_2_plot[!(df_2_plot$Genotype == "risk"), ]
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
+
 
 ggerrorplot(df_2_plot,
             x = "Genotype",
@@ -859,6 +1139,24 @@ df_2_plot$Genotype <-
 
 df_2_plot <-
   df_2_plot[df_2_plot$Cell_line == "CD09", ]
+
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
 
 ggerrorplot(df_2_plot,
             x = "Genotype",
@@ -929,6 +1227,24 @@ df_2_plot$Genotype <-
 df_2_plot <-
   df_2_plot[df_2_plot$Cell_line == "CD04", ]
 
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(Value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
+
 ggerrorplot(df_2_plot,
             x = "Genotype",
             y = "Value",
@@ -988,6 +1304,25 @@ df_2_plot$Genotype <-
 
 df_2_plot <-
   df_2_plot[df_2_plot$Cell_line == "CD09", ]
+
+df_2_plot$Genotype <-
+  relevel(df_2_plot$Genotype,
+          ref = "non-risk")
+
+df_2_plot$BR <-
+  as.factor(rep_len(x = c(1,1,1,
+                          2,2,2,
+                          3,3,3,3),
+                    length.out = nrow(df_2_plot)))
+
+lm_model <-
+  lmerTest::lmer(Value ~ Genotype + (1|BR),
+                 data = df_2_plot)
+# summary(lm_model)
+lm_output <-
+  summary(lm_model)
+print(lm_output)
+
 
 ggerrorplot(df_2_plot,
             x = "Genotype",
